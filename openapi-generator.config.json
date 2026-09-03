@@ -1,0 +1,13 @@
+{
+  "ngVersion": "22.0.1",
+  "rxjsVersion": "7.8.0",
+  "tsVersion": "6.0.0",
+  "providedIn": "root",
+  "fileNaming": "kebab-case",
+  "stringEnums": true,
+  "useSingleRequestParameter": true,
+  "withInterfaces": true,
+  "disallowAdditionalPropertiesIfNotPresent": false,
+  "modelSuffix": "Dto",
+  "serviceSuffix": "Api"
+}
