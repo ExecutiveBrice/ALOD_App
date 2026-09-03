@@ -1,11 +1,26 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+import type { AuthBackendConfig } from '../app/core/auth/auth.config';
 
 export const environment = {
   production: false,
   /** Adresse de votre API REST de développement, sans slash final. */
   apiUrl: 'http://localhost:8000',
+  /**
+   * Le login suit le Swagger (`POST /auth/signin`).
+   * Les champs de réponse sont configurables car le Swagger les déclare comme un objet libre.
+   */
+  auth: {
+    loginPath: '/auth/signin',
+    // Le Swagger actuel ne décrit pas d'endpoint de renouvellement.
+    refreshPath: undefined,
+    usernameField: 'username',
+    passwordField: 'password',
+    accessTokenField: 'token',
+    refreshTokenField: 'refreshToken',
+    refreshRequestField: 'refreshToken',
+  } satisfies AuthBackendConfig,
 };
 
 /*

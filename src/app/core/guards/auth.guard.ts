@@ -1,4 +1,11 @@
-import { CanActivateFn } from '@angular/router';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+import { AuthSessionService } from '../auth/auth-session.service';
 
-/** À relier à l’API d’authentification lorsque son contrat est connu. */
-export const authGuard: CanActivateFn = () => true;
+export const authGuard: CanActivateFn = (_route, state) => {
+  const session = inject(AuthSessionService);
+  const router = inject(Router);
+  return session.isAuthenticated()
+    ? true
+    : router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } });
+};

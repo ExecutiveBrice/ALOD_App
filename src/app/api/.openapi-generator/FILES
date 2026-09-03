@@ -2,6 +2,8 @@ api.base.service.ts
 api/adherent-controller.service.ts
 api/adherent-controller.serviceInterface.ts
 api/api.ts
+api/auth-controller.service.ts
+api/auth-controller.serviceInterface.ts
 configuration.ts
 encoder.ts
 model/accord.ts
@@ -9,6 +11,7 @@ model/activite-nm1.ts
 model/activite.ts
 model/adherent.ts
 model/adhesion.ts
+model/login-request.ts
 model/models.ts
 model/notification.ts
 model/planification-hebdomadaire.ts

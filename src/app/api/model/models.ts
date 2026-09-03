@@ -3,6 +3,7 @@ export * from './activite';
 export * from './activite-nm1';
 export * from './adherent';
 export * from './adhesion';
+export * from './login-request';
 export * from './notification';
 export * from './planification-hebdomadaire';
 export * from './presence';
