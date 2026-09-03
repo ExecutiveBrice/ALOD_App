@@ -31,11 +31,11 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "successful operation",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/Adherent"
                 }
               }
             }
@@ -45,6 +45,571 @@
     }
   },
   "components": {
+    "schemas": {
+      "Accord": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nom": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "valide": {
+            "type": "string"
+          },
+          "refus": {
+            "type": "string"
+          },
+          "refusable": {
+            "type": "boolean"
+          },
+          "etat": {
+            "type": "boolean"
+          },
+          "datePassage": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "required": [
+          "nom"
+        ]
+      },
+      "Activite": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "groupe": {
+            "type": "string"
+          },
+          "groupeFiltre": {
+            "type": "string"
+          },
+          "groupeCompta": {
+            "type": "string"
+          },
+          "nom": {
+            "type": "string"
+          },
+          "lien": {
+            "type": "string"
+          },
+          "tarif": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nbPlaces": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ageMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ageMax": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "genre": {
+            "type": "string"
+          },
+          "horaire": {
+            "type": "string"
+          },
+          "salle": {
+            "$ref": "#/components/schemas/Salle"
+          },
+          "reinscription": {
+            "type": "boolean"
+          },
+          "globaleSpecifique": {
+            "type": "boolean"
+          },
+          "priseEnCharge": {
+            "type": "boolean"
+          },
+          "autorisationParentale": {
+            "type": "boolean"
+          },
+          "vieClub": {
+            "type": "boolean"
+          },
+          "charteAmicale": {
+            "type": "boolean"
+          },
+          "jour": {
+            "type": "string",
+            "enum": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY",
+              "SUNDAY"
+            ]
+          },
+          "horaireDebut": {
+            "type": "string"
+          },
+          "duree": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "planificationsHebdomadaires": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanificationHebdomadaire"
+            }
+          },
+          "certificatMedical": {
+            "type": "boolean"
+          },
+          "complete": {
+            "type": "boolean"
+          },
+          "majoration": {
+            "type": "boolean"
+          },
+          "dureeVieCertif": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nbAdhesionsEnCours": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nbAdhesionsCompletes": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "montantCollecte": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nbAdhesionsAttente": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nbSeancesRealisees": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nbSeancesTotal": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "referents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Adherent"
+            },
+            "uniqueItems": true
+          },
+          "nomSalle": {
+            "type": "string"
+          }
+        }
+      },
+      "ActiviteNm1": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "activiteId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "groupe": {
+            "type": "string"
+          },
+          "groupeFiltre": {
+            "type": "string"
+          },
+          "nom": {
+            "type": "string"
+          },
+          "tarif": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "horaire": {
+            "type": "string"
+          },
+          "salle": {
+            "type": "string"
+          }
+        }
+      },
+      "Adherent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "prenom": {
+            "type": "string"
+          },
+          "nom": {
+            "type": "string"
+          },
+          "genre": {
+            "type": "string"
+          },
+          "telephone": {
+            "type": "string"
+          },
+          "naissance": {
+            "type": "string",
+            "format": "date"
+          },
+          "lieuNaissance": {
+            "type": "string"
+          },
+          "adresse": {
+            "type": "string"
+          },
+          "codePostal": {
+            "type": "string"
+          },
+          "ville": {
+            "type": "string"
+          },
+          "adresseRepresentant": {
+            "type": "boolean"
+          },
+          "telephoneRepresentant": {
+            "type": "boolean"
+          },
+          "emailRepresentant": {
+            "type": "boolean"
+          },
+          "mineur": {
+            "type": "boolean"
+          },
+          "completAdhesion": {
+            "type": "boolean"
+          },
+          "accords": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Accord"
+            }
+          },
+          "representant": {
+            "$ref": "#/components/schemas/Adherent"
+          },
+          "derniereVisites": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Notification"
+            }
+          },
+          "tribu": {
+            "$ref": "#/components/schemas/Tribu"
+          },
+          "adhesions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Adhesion"
+            },
+            "uniqueItems": true
+          },
+          "activitesNm1": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActiviteNm1"
+            }
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      },
+      "Adhesion": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tarif": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "position": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dejaLicencie": {
+            "type": "boolean"
+          },
+          "validPaiementSecretariat": {
+            "type": "boolean"
+          },
+          "validDocumentSecretariat": {
+            "type": "boolean"
+          },
+          "statutActuel": {
+            "type": "string"
+          },
+          "remarqueSecretariat": {
+            "type": "string"
+          },
+          "inscrit": {
+            "type": "boolean"
+          },
+          "flag": {
+            "type": "boolean"
+          },
+          "majoration": {
+            "type": "boolean"
+          },
+          "rappel": {
+            "type": "boolean"
+          },
+          "dateAjoutPanier": {
+            "type": "string",
+            "format": "date"
+          },
+          "dateChangementStatut": {
+            "type": "string",
+            "format": "date"
+          },
+          "accords": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Accord"
+            }
+          },
+          "activite": {
+            "$ref": "#/components/schemas/Activite"
+          },
+          "surClassement": {
+            "$ref": "#/components/schemas/Activite"
+          },
+          "presences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Presence"
+            }
+          },
+          "valide": {
+            "type": "boolean"
+          },
+          "enCours": {
+            "type": "boolean"
+          },
+          "enAttente": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Notification": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "raison": {
+            "type": "string"
+          }
+        }
+      },
+      "PlanificationHebdomadaire": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "jour": {
+            "type": "string",
+            "enum": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY",
+              "SUNDAY"
+            ]
+          },
+          "horaireDebut": {
+            "type": "string"
+          },
+          "duree": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "descriptif": {
+            "type": "string"
+          },
+          "salle": {
+            "$ref": "#/components/schemas/Salle"
+          },
+          "profs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Adherent"
+            },
+            "uniqueItems": true
+          },
+          "referents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Adherent"
+            },
+            "uniqueItems": true
+          },
+          "nbSeancesTotal": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nbSeancesRealisees": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "Presence": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "presence": {
+            "type": "boolean"
+          },
+          "presencePrevue": {
+            "type": "boolean"
+          },
+          "dateModification": {
+            "type": "string",
+            "format": "date"
+          },
+          "seanceId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "Role": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "enum": [
+              "ROLE_USER",
+              "ROLE_SECRETAIRE",
+              "ROLE_BUREAU",
+              "ROLE_ADMINISTRATEUR",
+              "ROLE_ADMIN",
+              "ROLE_COMPTABLE",
+              "ROLE_PROF",
+              "ROLE_REFERENT"
+            ]
+          }
+        }
+      },
+      "Salle": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nom": {
+            "type": "string"
+          },
+          "adresse": {
+            "type": "string"
+          },
+          "couleur": {
+            "type": "string"
+          }
+        }
+      },
+      "Tribu": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "uuid": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "username": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 0
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            },
+            "uniqueItems": true
+          },
+          "emailValid": {
+            "type": "boolean"
+          },
+          "sessionVersion": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "notifs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Notification"
+            },
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "username"
+        ]
+      }
+    },
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",

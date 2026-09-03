@@ -5,7 +5,8 @@ const angular = require("angular-eslint");
 module.exports = tseslint.config(
   {
     files: ["**/*.ts"],
-    ignores: ["projects/**/*"],
+    // Le client OpenAPI est déterministe et ne doit pas être modifié pour satisfaire les règles applicatives.
+    ignores: ["projects/**/*", "src/app/api/**/*.ts"],
     extends: [...angular.configs.tsRecommended],
     processor: angular.processInlineTemplates,
     rules: {

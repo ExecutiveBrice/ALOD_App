@@ -12,7 +12,8 @@
     "lint": "ng lint",
     "cap:sync": "npx cap sync",
     "cap:android": "npx cap open android",
-    "cap:ios": "npx cap open ios"
+    "cap:ios": "npx cap open ios",
+    "generate-api": "rm -rf src/app/api && openapi-generator-cli generate -i src/app/swagger-adhesion.json -g typescript-angular -o src/app/api -c openapi-generator.config.json --openapi-generator-ignore-list api.module.ts,index.ts,.gitignore,git_push.sh,README.md,.openapi-generator/ --global-property apiDocs=false,modelDocs=false,apiTests=false,modelTests=false"
   },
   "private": true,
   "dependencies": {
@@ -37,6 +38,7 @@
     "@angular/language-service": "22.0.1",
     "@capacitor/cli": "^8.5.1",
     "@ionic/angular-toolkit": "^13.0.0",
+    "@openapitools/openapi-generator-cli": "^2.41.0",
     "angular-eslint": "22.0.0",
     "eslint": "^9.16.0",
     "jsdom": "^26.0.0",
