@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>ALOD Présences</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <main class="dashboard">
+    <section class="welcome">
+      <ion-badge color="primary">Équipe</ion-badge>
+      <h1>Gérez vos présences</h1>
+      <p>Retrouvez les entraînements et matchs à venir, puis suivez les disponibilités de votre équipe.</p>
+    </section>
+
+    <section class="period-picker" aria-label="Période affichée">
+      <ion-button [fill]="selectedPeriod() === 'week' ? 'solid' : 'outline'" (click)="selectPeriod('week')">Semaine</ion-button>
+      <ion-button [fill]="selectedPeriod() === 'month' ? 'solid' : 'outline'" (click)="selectPeriod('month')">Mois</ion-button>
+    </section>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Prochains rendez-vous</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-icon name="cloud-download-outline" aria-hidden="true"></ion-icon>
+        <p>Les événements {{ periodLabel() }} apparaîtront ici lorsque l’API sera configurée.</p>
+        <ion-button routerLink="/events" fill="clear">Voir les événements</ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <section class="quick-actions" aria-label="Actions rapides">
+      <ion-button routerLink="/attendance" expand="block"><ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>Présences</ion-button>
+      <ion-button routerLink="/players" expand="block" fill="outline"><ion-icon slot="start" name="people-outline"></ion-icon>Effectif</ion-button>
+    </section>
+  </main>
+</ion-content>
